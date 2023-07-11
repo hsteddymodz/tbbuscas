@@ -1,4 +1,6 @@
-<?php
+  ));
+    }
+}<?php
 
  $input = file_get_contents('php://input');
 
@@ -17,6 +19,13 @@
  $id = $message->from->id;
  
  $isbot = $message->from->is_bot;
+ 
+ $on = '🟢';
+ 
+ $manut = '🟡';
+ 
+ $off = '🔴';
+ 
  
  if($message->from->is_premium){
    
@@ -76,27 +85,26 @@ function consultas($dados){
 
 *• | MÓDULOS | •*
 
-🟢*CNPJ:*
-🟢*SCORE:*
-🟢*CPF1:*
-🟢*CEP:*
-🟢*CPF2:*
-🟢*CPF3:*
-🟢*CPF4*
-🟢*TEL1:*
-🟢*TEL2:*
-🟢*TEL3:*
-🟢*NOME:*
-🟢*PARENTES:*
-🟢*VIZINHOS:*
-🟢*BIN:*
-🟢*IP:*
-🟢*PLACA1:*
-🟢*EMAIL:*
-🟢*CNPJ:*
-🔴*PLACA2:*
-🟡*RG:*
-🟡*SITE:*
+🟢 *SCORE:*
+🟢 *CPF1:*
+🟢 *CEP:*
+🟢 *CPF2:*
+🟢 *CPF3:*
+🟢 *CPF4*
+🟢 *TEL1:*
+🟢 *TEL2:*
+🟢 *TEL3:*
+🟡 *NOME:*
+🟢 *PARENTES:*
+🟢 *VIZINHOS:*
+🟢 *BIN:*
+🟡 *IP:*
+🟢 *PLACA1:*
+🟢 *EMAIL:*
+🟢 *CNPJ:*
+🔴 *PLACA2:*
+🔴 *RG:*
+🔴 *SITE:*
 
 ⚡️ *Use os comandos em Grupos e no Privado do Robô*
 
@@ -122,59 +130,25 @@ function tabela($dados){
   $chat_id = $dados["chat_id"];
   $message_id = $dados["query_message_id"];
   
-  $txt = "✅BIN✅
-✅TEL
-✅CEP✅
-✅CNPJ✅
-✅PLACA✅
-✅CPF1✅
-✅CPF2✅
-✅CPF3✅
-✅IP✅
-✅NOME✅
-✅PARENTES✅
-✅VIZINHOS✅
-✅EMAIL✅
-✅SCORE✅
-✅SITE✅
+  $txt = "● | PREÇOS INDIVIDUAIS | ●
 
-♠️ 𝖭𝖮𝖵𝖮𝖲 𝖬𝖮‌𝖣𝖴𝖫𝖮𝖲 𝖤𝖬 𝖡𝖱𝖤𝖵𝖤 ♠️
+7 DIAS 》15$
+15 DIAS》 28
+30 DIAS》 45
 
-🚀🔥 𝗧𝗔𝗕𝗘𝗟𝗔 𝗗𝗘 𝗣𝗥𝗘𝗖‌𝗢𝗦 🔥🚀
+● | PREÇOS PARA GRUPOS | ●
 
-✅  07 DIAS 20 R$
-✅  15 DIAS 35 R$
-✅  30 DIAS 50 R$ 
-✅  60 DIAS 85 R$
+7DIAS 》19$
+15 DIAS》 34$
+30 DIAS》 65$
 
-♣️ 𝘊𝘖𝘕𝘚𝘜𝘓𝘛𝘈𝘚 𝘐𝘓𝘐𝘔𝘐𝘛𝘈𝘋𝘈𝘚 ♣️
+💰 | PAGAMENTOS | 💰
 
-💎  𝙏𝘼𝘽𝙀𝙇𝘼 𝘿𝙀 𝙋𝙍𝙀𝘾‌𝙊𝙎 𝙋𝘼𝙍𝘼 𝙂𝙍𝙐𝙋𝙊 𝙑𝙄𝙋 💎
+PIX
 
-✅ 7 DIAS 25 R$ 
-✅ 15 DIAS 45 R$ 
-✅ 1 MES 80 R$
 
-💰 𝙁𝙊𝙍𝙈𝘼𝙎 𝘿𝙀 𝙋𝘼𝙂𝘼𝙈𝙀𝙉𝙏𝙊 💰
-
-----------------------------------------------
-💰𝗣𝗜𝗫
-----------------------------------------------
-
-• 𝗖𝗔𝗡𝗔𝗟 𝗗𝗘 𝗥𝗘𝗙𝗦 
-@refs_teddydo7
-
-• 𝗚𝗥𝗨𝗣𝗢 𝗢𝗙𝗖 
-@tropa_do_teddy
-
-• 𝗗𝗢𝗡𝗢 𝗗𝗢 𝗕𝗢𝗧
-@teddyzinofc
-
-👺 𝘔𝘌𝘓𝘏𝘖𝘙 𝘚𝘜𝘗𝘖𝘙𝘛𝘌 𝘋𝘖 𝘛𝘌𝘓𝘌𝘎𝘙𝘈𝘔 👺
-
-🚨 𝘊𝘏𝘈𝘔𝘖𝘜 𝘗𝘝 𝘌 𝘍𝘐𝘊𝘖𝘜 𝘌𝘕𝘙𝘖𝘓𝘈𝘕𝘋𝘖 = 𝘚𝘗𝘈𝘔 🚨
-
- ❌ 𝙎𝙊‌ 𝘾𝙃𝘼𝙈𝘼 𝙎𝙀 𝙌𝙐𝙄𝙎𝙀𝙍 𝘾𝙊𝙈𝙋𝙍𝘼𝙍 ❌";
+👤 Dono: @teddyzinofc
+━━━━━━━━━━━━━━━━━━━━━";
 
   $button[] = ['text'=>"Voltar", "callback_data" => "start"];
 
@@ -253,6 +227,39 @@ bot("sendMessage",
     "parse_mode" => 'Markdown'));
 }
 
+if (strpos($texto, "/menu") === 0){
+  
+  $txt = '🔹 *Bem Vindo {$nome}*
+  
+• [Canal - Oficial](t.me/tropa_do_teddy7)
+
+_Navegue pelo meu menu abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
+
+  
+
+  $button[] = ['text'=>"Consultas",'callback_data'=>"consultas"];
+  
+  $button[] = ['text'=>"Tabela",'callback_data'=>"tabela"];
+  
+  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddyzinofc"];
+ 
+ $menu['inline_keyboard'] = array_chunk($button, 2);
+
+  bot("sendChatAction", 
+    array(
+    "chat_id" => $chat_id,
+    "action" => "typing"));
+
+bot("sendMessage",
+    array(
+    "chat_id"=> $chat_id ,
+    "text" => $txt,
+    "reply_markup" => $menu,
+    "reply_to_message_id"=> $message_id,
+    "message_id" => $message_id,
+    "parse_mode" => 'Markdown'));
+}
+
 //Código para o comando:
 
 // Verificar se o comando "/score" foi usado
@@ -273,6 +280,8 @@ if (strpos($texto, "/score") === 0) {
 
         exit();
     }
+    
+    
 
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/score.php';
@@ -594,7 +603,7 @@ if (strpos($texto, "/cnpj") === 0) {
 
 if (strpos($texto, "/placa1") === 0) {
     // Extrair o telefone da mensagem
-    $placa1 = substr($texto, 6);
+    $placa1 = substr($texto, 8);
 
     if (empty($placa1)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
@@ -648,7 +657,7 @@ if (strpos($texto, "/beneficios") === 0) {
 
 if (strpos($texto, "/bin") === 0) {
     // Extrair o telefone da mensagem
-    $bin = substr($texto, 6);
+    $bin = substr($texto, 5);
 
     if (empty($bin)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
@@ -702,7 +711,7 @@ if (strpos($texto, "/parentes") === 0) {
 
 if (strpos($texto, "/cep") === 0) {
     // Extrair o telefone da mensagem
-    $cep = substr($texto, 6);
+    $cep = substr($texto, 5);
 
     if (empty($cep)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
