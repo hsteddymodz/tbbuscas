@@ -48,7 +48,7 @@
  $query_id = $update->callback_query->id;
 
 function bot($method, $parameters) {
- $token = "5648937247:AAFv0av_VmnNloU52SHvK7PoapAdn6JdVU4";
+ $token = "5648937247:AAHISzp-6dleILFwivUqI2qdgBkBiTA_45I";
  $options = array(
 			 'http' => array(
 			 'method'  => 'POST',
