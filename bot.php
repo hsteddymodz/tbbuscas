@@ -312,8 +312,6 @@ bot("sendMessage",
 
 //Código para o comando:
 
-<?php
-
 // Verificar se o comando "/score" foi usado
 if (strpos($texto, "/score") === 0) {
     // Extrair o telefone da mensagem
