@@ -29,8 +29,6 @@
      $ispremium = "não";
      
  }
- $nome = $message->from->first_name;
- 
  $nomek = $message->from->first_name;
  
  $usuario = $message->chat->username;
@@ -68,7 +66,7 @@ function consultas($dados){
   $chat_id = $dados["chat_id"];
   $message_id = $dados["query_message_id"];
   
-  $txt = "*☆ | COMANDOS BOT @teddyzinofc | ☆*
+  $txt = "*☆ | COMANDOS BOT @teddy_do_7 | ☆*
 
 *🔄 Bases de dados atualizada, servidores otimizados!*
 
@@ -80,30 +78,30 @@ function consultas($dados){
 
 *• | MÓDULOS | •*
 
-🟢 *SCORE: /score 00000000000*
-🟢 *CPF1: /cpf1 00000000000*
-🟢 *CPF2: /cpf2 00000000000*
-🟢 *CPF3: /cpf3 00000000000*
-🟢 *CPF4 /cpf4 00000000000*
-🟢 *TEL1: /tel1 81971185449*
-🟢 *TEL2: /tel2 81971185449*
-🟢 *TEL3: /tel3 81971185449*
-🟢 *NOME: /nome Jamilly Cambui*
-🟢 *PARENTES: /parentes 00000000000*
-🟢 *VIZINHOS: /vizinhos 00000000000*
-🟢 *BIN: /bin 000000*
-🟢 *CEP: /cep 54520015*
-🟡 *IP:*
-🟢 *PLACA1:*
-🟢 *EMAIL: /email joao@hotmail.com*
-🟢 *CNPJ: /cnpj 0000000000000*
-🔴 *PLACA2:*
-🔴 *RG:*
-🔴 *SITE:*
+🟢 SCORE: `/score 00000000000`
+🟢 CPF1: `/cpf1 00000000000`
+🟢 CPF2: `/cpf2 00000000000`
+🟢 CPF3: `/cpf3 00000000000`
+🟢 CPF4 `/cpf4 00000000000`
+🟢 TEL1: `/tel1 81971185449`
+🟢 TEL2: `/tel2 81971185449`
+🟢 TEL3: `/tel3 81971185449`
+🟢 NOME: `/nome Jamilly Cambui`
+🟢 PARENTES: `/parentes 00000000000`
+🟢 VIZINHOS: `/vizinhos 00000000000`
+🟢 BIN: `/bin 000000`
+🟢 CEP: `/cep 54520015`
+🟡 IP:
+🟢 PLACA1:
+🟢 EMAIL: `/email joao@hotmail.com`
+🟢 CNPJ: `/cnpj 0000000000000`
+🟢 RG: `/rg 0000000`
+🔴 PLACA2:
+🔴 SITE:
 
 ⚡️ *Use os comandos em Grupos e no Privado do Robô*
 
-👤 *Suporte: @teddyzinofc*
+👤 *Suporte: @teddy_do_7*
 ━━━━━━━━━━━━━━━━━━━━━";
 
   $button[] = ['text'=>"Voltar", "callback_data" => "start"];
@@ -145,7 +143,7 @@ function tabela($dados){
 PIX
 
 
-👤 Dono: @teddyzinofc
+👤 Dono: @teddy_do_7
 ━━━━━━━━━━━━━━━━━━━━━";
 
   $button[] = ['text'=>"Voltar", "callback_data" => "start"];
@@ -200,19 +198,21 @@ function start($dados){
   
   $chat_id = $dados["chat_id"];
   $message_id = $dados["query_message_id"];
-  $nome = $dados["nome"];
+  $nomek = $dados["nome"];
   
-  $txt = "🔹 *Bem Vindo {$nomek}*
+  $txt = '🔹 *Bem Vindo(a)*
   
 • [Canal - Oficial](t.me/tropa_do_teddy7)
+• [Grupo - Oficial](t.me/tropa_do_teddy)
 
-_Navegue pelo meu menu abaixo:_";
+_Navegue pelo meu menu abaixo:_
+[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
   $button[] = ['text'=>"Consultas",'callback_data'=>"consultas"];
   
   $button[] = ['text'=>"Tabela",'callback_data'=>"tabela"];
   
-  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddyzinofc"];
+  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddy_do_7"];
 
   $menu['inline_keyboard'] = array_chunk($button, 2);
   
@@ -228,11 +228,13 @@ _Navegue pelo meu menu abaixo:_";
 
 if (strpos($texto, "/start") === 0){
   
-  $txt = '🔹 *Bem Vindo {$nomek}*
+  $txt = '🔹 *Bem Vindo(a)*
   
 • [Canal - Oficial](t.me/tropa_do_teddy7)
+• [Grupo - Oficial](t.me/tropa_do_teddy)
 
-_Navegue pelo meu menu abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
+_Navegue pelo meu menu abaixo:_
+[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
   
 
@@ -240,7 +242,7 @@ _Navegue pelo meu menu abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png
   
   $button[] = ['text'=>"Tabela",'callback_data'=>"tabela"];
   
-  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddyzinofc"];
+  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddy_do7"];
  
  $menu['inline_keyboard'] = array_chunk($button, 2);
 
@@ -262,8 +264,6 @@ bot("sendMessage",
 if (strpos($texto, "/menu") === 0){
   
   $txt = '🔹 *Bem Vindo {$nomek}*
-  
-• [Canal - Oficial](t.me/tropa_do_teddy7)
 
 _Navegue pelo meu menu abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
@@ -273,7 +273,7 @@ _Navegue pelo meu menu abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png
   
   $button[] = ['text'=>"Tabela",'callback_data'=>"tabela"];
   
-  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddyzinofc"];
+  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddy_do_7"];
  
  $menu['inline_keyboard'] = array_chunk($button, 2);
 
@@ -292,36 +292,18 @@ bot("sendMessage",
     "parse_mode" => 'Markdown'));
 }
 
-if (strpos($texto, "/id") === 0){
-$txt = "Olá {$usuario}";
-
-bot("sendChatAction", 
-    array(
-    "chat_id" => $chat_id,
-    "action" => "typing"));
-
-bot("sendMessage",
-    array(
-    "chat_id"=> $chat_id,
-    "text"=> $txt,
-    "reply_markup"=> $menu,
-    "reply_to_message_id"=> $message_id,
-    "message_id"=> $message_id,
-    "parse_mode"=> 'Markdown'));
-}
-
 //Código para o comando:
+
 
 // Verificar se o comando "/score" foi usado
 if (strpos($texto, "/score") === 0) {
     // Extrair o telefone da mensagem
-    $score = substr($texto, 7); // Modifique esta linha para começar após "/score"
+    $score = substr($texto, 7);
 
-    // Validar se a entrada contém apenas números
-    if (!preg_match('/^\d+$/', $score)) {
+    if (empty($score)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
-/score 000000000
+/score 00000000000
 [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
         bot("sendMessage", array(
@@ -335,34 +317,34 @@ if (strpos($texto, "/score") === 0) {
 
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/score.php';
+    
+    bot("sendChatAction",
+array("chat_id"=> $chat_id,
+"action"=> "typing"));
 
-    bot("sendChatAction", array(
-        "chat_id" => $chat_id,
-        "action" => "typing"
-    ));
+$txt = "Consultando🔎";
 
-    $txt = "Consultando🔎";
+bot("sendMessage", array(
+                "chat_id" => $chat_id,
+                "text" => $txt,
+                "parse_mode" => "Markdown",
 
-    bot("sendMessage", array(
-        "chat_id" => $chat_id,
-        "text" => $txt,
-        "parse_mode" => "Markdown",
-        /* "reply_markup" => [
-            "inline_keyboard" => [
-                [
-                    ["text" => "🗑️", "callback_data" => "delete_message"]
-                ]
-            ]
-        ] */
-    ));
-
-    bot("sendChatAction", array(
-        "chat_id" => $chat_id,
-        "action" => 'typing'
-    ));
+      /*          "reply_markup" => [
+                    "inline_keyboard" => [
+                        [
+                            ["text" => "🗑️", "callback_data" => "delete_message"]
+                        ]
+                    ]
+               ]*/
+            ));
+            
+           bot("sendChatAction", array(
+           "chat_id"=> $chat_id,
+           "action"=> 'typing'));
 
     // Chamar a função de consulta do telefone na segunda API
-    score($score, $chat_id);
+    tel2($score, $chat_id);
+    
 }
 
 //Código para o comando:
@@ -650,6 +632,59 @@ if (strpos($texto, "/cpf1") === 0) {
     // Chamar a função de consulta do telefone na segunda API
     cpf1($cpf1, $chat_id);
     
+}
+
+// Verificar se o comando "/score" foi usado
+if (strpos($texto, "/rg") === 0) {
+    // Extrair o telefone da mensagem
+    $rg = substr($rg, 3); // Modifique esta linha para começar após "/score"
+
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', rg)) {
+        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
+        $caption = '_Não seja mamaco, use assim_:
+/score 000000000
+[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
+
+        bot("sendMessage", array(
+            "chat_id" => $chat_id,
+            "text" => $caption,
+            "parse_mode" => "Markdown"
+        ));
+
+        exit();
+    }
+
+    // Incluir o arquivo com as funções de consulta
+    require_once 'includes/rg.php';
+
+    bot("sendChatAction", array(
+        "chat_id" => $chat_id,
+        "action" => "typing"
+    ));
+
+    $txt = "Consultando🔎";
+
+    bot("sendMessage", array(
+        "chat_id" => $chat_id,
+        "text" => $txt,
+        "parse_mode" => "Markdown",
+        /* "reply_markup" => [
+            "inline_keyboard" => [
+                [
+                    ["text" => "🗑️", "callback_data" => "delete_message"]
+                ]
+            ]
+        ] */
+    ));
+
+    bot("sendChatAction", array(
+        "chat_id" => $chat_id,
+        "action" => 'typing'
+    ));
+
+    // Chamar a função de consulta do telefone na segunda API
+    rg($rg, $chat_id);
 }
 
 // Verificar se o comando "/cpf2" foi usado
