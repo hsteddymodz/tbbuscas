@@ -1,25 +1,35 @@
 <?php
 
- $input = file_get_contents('php://input');
+$mono = "`";
 
- $update = json_decode($input);
+$authorized_chats = array(
+    '6686054045', // ID do primeiro grupo autorizado
+    '-1001972359345', // ID do segundo grupo autorizado
+    '6686054045',
+    '-998748959' //ID do terceiro gp
+);
 
- $message = $update->message;
- 
- $chat_id = $message->chat->id;
- 
- $message_id = $update->message->message_id;
- 
- $tipo = $message->chat->type;
- 
- $texto = $message->text;
- 
- $id = $message->from->id;
- 
- $isbot = $message->from->is_bot;
- 
- $mono = "`";
- 
+$input = file_get_contents('php://input');
+
+$update = json_decode($input);
+
+$message = $update->message;
+
+$chat_id = $message->chat->id;
+
+if (in_array($chat_id, $authorized_chats)) {
+
+$message_id = $update->message->message_id;
+
+$tipo = $message->chat->type;
+
+$texto = $message->text;
+
+$id = $message->from->id;
+
+$isbot = $message->from->is_bot;
+}
+
  if($message->from->is_premium){
    
      $ispremium = "sim";
@@ -29,7 +39,7 @@
      $ispremium = "não";
      
  }
- $nomek = $message->from->first_name;
+ $nome = $message->from->first_name;
  
  $usuario = $message->chat->username;
  
@@ -46,7 +56,7 @@
  $query_id = $update->callback_query->id;
 
 function bot($method, $parameters) {
- $token = "5648937247:AAHISzp-6dleILFwivUqI2qdgBkBiTA_45I";
+ $token = "6067551514:AAHD7FeGd_I-KFjrSq3VSEPbPPRhjGyBlJA";
  $options = array(
 			 'http' => array(
 			 'method'  => 'POST',
@@ -67,40 +77,43 @@ function consultas($dados){
   $message_id = $dados["query_message_id"];
   
   $txt = "*☆ | COMANDOS BOT @teddy_do_7 | ☆*
-
 *🔄 Bases de dados atualizada, servidores otimizados!*
 
 *● | PARÂMETROS | ●*
-
 🟢 *STATUS 》* ONLINE
-🟡* STATUS 》* MANUTENÇÃO
-🔴 *STATUS 》 *OFFLINE
+🟡 *STATUS 》* MANUTENÇÃO
+🔴 *STATUS 》* OFFLINE
 
 *• | MÓDULOS | •*
-
-🟢 SCORE: `/score 00000000000`
+🔴 SCORE: `/score 00000000000`
 🟢 CPF1: `/cpf1 00000000000`
-🟢 CPF2: `/cpf2 00000000000`
-🟢 CPF3: `/cpf3 00000000000`
-🟢 CPF4 `/cpf4 00000000000`
-🟢 TEL1: `/tel1 81971185449`
-🟢 TEL2: `/tel2 81971185449`
-🟢 TEL3: `/tel3 81971185449`
-🟢 NOME: `/nome Jamilly Cambui`
-🟢 PARENTES: `/parentes 00000000000`
-🟢 VIZINHOS: `/vizinhos 00000000000`
-🟢 BIN: `/bin 000000`
+🔴 CPF2: `/cpf2 00000000000`
+🔴 CPF3: `/cpf3 00000000000`
+🔴 CPF4: `/cpf4 00000000000`
+
+🔴 TEL1: `/tel1 81971185449`
+🔴 TEL2: `/tel2 81971185449`
+🔴 TEL3: `/tel3 81971185449`
+🔴 NOME: `/nome Jamilly Cambui`
+🔴 PARENTES: `/parentes 00000000000`
+🔴 VIZINHOS: `/vizinhos 00000000000`
+🔴 BIN: `/bin 000000`
 🟢 CEP: `/cep 54520015`
-🟡 IP:
-🟢 PLACA1:
-🟢 EMAIL: `/email joao@hotmail.com`
-🟢 CNPJ: `/cnpj 0000000000000`
-🟢 RG: `/rg 0000000`
+
+🔴 IP:
+🔴 PLACA1:
+🔴 EMAIL: `/email joao@hotmail.com`
+🔴 CNPJ: `/cnpj 0000000000000`
+🔴 RG: `/rg 0000000`
+
 🔴 PLACA2:
 🔴 SITE:
 
-⚡️ *Use os comandos em Grupos e no Privado do Robô*
+*● | CHECKERS | ●*
 
+🟡CHK: `/chk`
+
+⚡️ *Use os comandos em Grupos e no Privado do Robô*
 👤 *Suporte: @teddy_do_7*
 ━━━━━━━━━━━━━━━━━━━━━";
 
@@ -119,6 +132,8 @@ function consultas($dados){
 }
 
 //comando de chk live
+
+
 //fim
 
 function tabela($dados){
@@ -129,13 +144,13 @@ function tabela($dados){
   $txt = "● | PREÇOS INDIVIDUAIS | ●
 
 7 DIAS 》15$
-15 DIAS》 28
-30 DIAS》 45
+15 DIAS》 28$
+30 DIAS》 45$
 
 ● | PREÇOS PARA GRUPOS | ●
 
-7DIAS 》19$
-15 DIAS》 34$
+7DIAS 》25$
+15 DIAS》 35$
 30 DIAS》 65$
 
 💰 | PAGAMENTOS | 💰
@@ -160,53 +175,17 @@ PIX
     "parse_mode" => 'Markdown'));
 }
 
-if (strpos($texto, "/edittest") === 0){
-
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-
-bot("sendChatAction", array(
-    "chat_id"=> $chat_id,
-    "action"=> 'typing'));
-
-$editkk = "`⚠️ Não Encontrado ⚠️`";
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $editkk,
-                "parse_mode" => "Markdown"));
-
-
-}
-
 function start($dados){
   
   $chat_id = $dados["chat_id"];
   $message_id = $dados["query_message_id"];
-  $nomek = $dados["nome"];
+  $nome = $dados["nome"];
   
-  $txt = '🔹 *Bem Vindo(a)*
+    $txt = "🐻 *Bem Vindo! {$nome}*
   
-• [Canal - Oficial](t.me/tropa_do_teddy7)
-• [Grupo - Oficial](t.me/tropa_do_teddy)
-
-_Navegue pelo meu menu abaixo:_
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
+🆔 : $mono{$chat_id}$mono
+  
+_Explore minhas funcionalidades abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
 
   $button[] = ['text'=>"Consultas",'callback_data'=>"consultas"];
   
@@ -228,46 +207,11 @@ _Navegue pelo meu menu abaixo:_
 
 if (strpos($texto, "/start") === 0){
   
-  $txt = '🔹 *Bem Vindo(a)*
+  $txt = "🐻 *Bem Vindo! {$nome}*
   
-• [Canal - Oficial](t.me/tropa_do_teddy7)
-• [Grupo - Oficial](t.me/tropa_do_teddy)
-
-_Navegue pelo meu menu abaixo:_
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
+🆔 : $mono{$chat_id}$mono
   
-
-  $button[] = ['text'=>"Consultas",'callback_data'=>"consultas"];
-  
-  $button[] = ['text'=>"Tabela",'callback_data'=>"tabela"];
-  
-  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddy_do7"];
- 
- $menu['inline_keyboard'] = array_chunk($button, 2);
-
-  bot("sendChatAction", 
-    array(
-    "chat_id" => $chat_id,
-    "action" => "typing"));
-
-bot("sendMessage",
-    array(
-    "chat_id"=> $chat_id ,
-    "text" => $txt,
-    "reply_markup" => $menu,
-    "reply_to_message_id"=> $message_id,
-    "message_id" => $message_id,
-    "parse_mode" => 'Markdown'));
-}
-
-if (strpos($texto, "/menu") === 0){
-  
-  $txt = '🔹 *Bem Vindo {$nomek}*
-
-_Navegue pelo meu menu abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-  
+_Explore minhas funcionalidades abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
 
   $button[] = ['text'=>"Consultas",'callback_data'=>"consultas"];
   
@@ -292,15 +236,44 @@ bot("sendMessage",
     "parse_mode" => 'Markdown'));
 }
 
-//Código para o comando:
+if (strpos($texto, "/menu") === 0){
+  
+  $txt = "🐻 *Bem Vindo! {$nome}*
+  
+🆔 : $mono{$chat_id}$mono
+  
+_Explore minhas funcionalidades abaixo:_ [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
 
+  $button[] = ['text'=>"Consultas",'callback_data'=>"consultas"];
+  
+  $button[] = ['text'=>"Tabela",'callback_data'=>"tabela"];
+  
+  $button[] = ['text'=>"Suporte / Dev",'url'=>"t.me/teddy_do_7"];
+ 
+ $menu['inline_keyboard'] = array_chunk($button, 2);
+
+  bot("sendChatAction", 
+    array(
+    "chat_id" => $chat_id,
+    "action" => "typing"));
+
+bot("sendMessage",
+    array(
+    "chat_id"=> $chat_id ,
+    "text" => $txt,
+    "reply_markup" => $menu,
+    "reply_to_message_id"=> $message_id,
+    "message_id" => $message_id,
+    "parse_mode" => 'Markdown'));
+}
 
 // Verificar se o comando "/score" foi usado
 if (strpos($texto, "/score") === 0) {
-    // Extrair o telefone da mensagem
+    // Extrair o score da mensagem
     $score = substr($texto, 7);
 
-    if (empty($score)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $score)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
 /score 00000000000
@@ -317,47 +290,21 @@ if (strpos($texto, "/score") === 0) {
 
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/score.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
 
     // Chamar a função de consulta do telefone na segunda API
-    tel2($score, $chat_id);
-    
+    score($score, $chat_id);
 }
-
-//Código para o comando:
 
 // Verificar se o comando "/tel2" foi usado
 if (strpos($texto, "/tel2") === 0) {
     // Extrair o telefone da mensagem
     $tel2 = substr($texto, 6);
 
-    if (empty($tel2)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $tel2)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
-/tel2 00000000000
+/tel2 81971185449
 [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
         bot("sendMessage", array(
@@ -371,98 +318,23 @@ if (strpos($texto, "/tel2") === 0) {
 
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/tel2.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
 
     // Chamar a função de consulta do telefone na segunda API
     tel2($tel2, $chat_id);
-    
-}
-
-if (strpos($texto, "/chk") === 0) {
-    // Extrair o telefone da mensagem
-    $chk = substr($texto, 5);
-
-    if (empty($chk)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/tel2 00000000000
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/chk.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
-    // Chamar a função de consulta do telefone na segunda API
-    chk($chk, $chat_id);
-    
 }
 
 //Código para o comando:
 
-// Verificar se o comando "/site" foi usado
-if (strpos($texto, "/site") === 0) {
+// Verificar se o comando "/t" foi usado
+if (strpos($texto, "/nome") === 0) {
     // Extrair o telefone da mensagem
-    $site = substr($texto, 6);
+    $nomek = substr($texto, 6);
 
-    if (empty($site)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
+    if (empty($nomek)) {
+        $photo_url = "https://i.ibb.co/2YhfdmV/1688958230412.png";
         $caption = '_Não seja mamaco, use assim_:
-/site replit.com
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
+/nome renata jose
+[ ](' . $photo_url . ')';
 
         bot("sendMessage", array(
             "chat_id" => $chat_id,
@@ -474,136 +346,10 @@ if (strpos($texto, "/site") === 0) {
     }
 
     // Incluir o arquivo com as funções de consulta
-    require_once 'includes/site.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
+    require_once 'includes/nome.php';
 
     // Chamar a função de consulta do telefone na segunda API
-    site($site, $chat_id);
-    
-}
-
-// Verificar se o comando "/tel1" foi usado
-if (strpos($texto, "/tel1") === 0) {
-    // Extrair o telefone da mensagem
-    $tel1 = substr($texto, 6);
-
-    if (empty($tel1)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/tel1 00000000000
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/tel1.php';
-
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
-    // Chamar a função de consulta do telefone na segunda API
-    tel1($tel1, $chat_id);
-    
-}
-
-// Verificar se o comando "/tel3" foi usado
-if (strpos($texto, "/tel3") === 0) {
-    // Extrair o telefone da mensagem
-    $tel3 = substr($texto, 6);
-
-    if (empty($tel3)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/tel3 00000000000
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/tel3.php';
-
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
-    // Chamar a função de consulta do telefone na segunda API
-    tel3($tel3, $chat_id);
-    
+    nomek($nomek, $chat_id);
 }
 
 // Verificar se o comando "/cpf1" foi usado
@@ -611,7 +357,8 @@ if (strpos($texto, "/cpf1") === 0) {
     // Extrair o telefone da mensagem
     $cpf1 = substr($texto, 6);
 
-    if (empty($cpf1)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $cpf1)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
 /cpf1 00000000000
@@ -631,60 +378,6 @@ if (strpos($texto, "/cpf1") === 0) {
 
     // Chamar a função de consulta do telefone na segunda API
     cpf1($cpf1, $chat_id);
-    
-}
-
-// Verificar se o comando "/score" foi usado
-if (strpos($texto, "/rg") === 0) {
-    // Extrair o telefone da mensagem
-    $rg = substr($rg, 3); // Modifique esta linha para começar após "/score"
-
-    // Validar se a entrada contém apenas números
-    if (!preg_match('/^\d+$/', rg)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/score 000000000
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/rg.php';
-
-    bot("sendChatAction", array(
-        "chat_id" => $chat_id,
-        "action" => "typing"
-    ));
-
-    $txt = "Consultando🔎";
-
-    bot("sendMessage", array(
-        "chat_id" => $chat_id,
-        "text" => $txt,
-        "parse_mode" => "Markdown",
-        /* "reply_markup" => [
-            "inline_keyboard" => [
-                [
-                    ["text" => "🗑️", "callback_data" => "delete_message"]
-                ]
-            ]
-        ] */
-    ));
-
-    bot("sendChatAction", array(
-        "chat_id" => $chat_id,
-        "action" => 'typing'
-    ));
-
-    // Chamar a função de consulta do telefone na segunda API
-    rg($rg, $chat_id);
 }
 
 // Verificar se o comando "/cpf2" foi usado
@@ -692,7 +385,8 @@ if (strpos($texto, "/cpf2") === 0) {
     // Extrair o telefone da mensagem
     $cpf2 = substr($texto, 6);
 
-    if (empty($cpf2)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $cpf2)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
 /cpf2 00000000000
@@ -710,40 +404,18 @@ if (strpos($texto, "/cpf2") === 0) {
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/cpf2.php';
 
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
     // Chamar a função de consulta do telefone na segunda API
     cpf2($cpf2, $chat_id);
-    
 }
+
 
 // Verificar se o comando "/cpf3" foi usado
 if (strpos($texto, "/cpf3") === 0) {
     // Extrair o telefone da mensagem
     $cpf3 = substr($texto, 6);
 
-    if (empty($cpf3)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $cpf3)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
 /cpf3 00000000000
@@ -761,40 +433,18 @@ if (strpos($texto, "/cpf3") === 0) {
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/cpf3.php';
 
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
     // Chamar a função de consulta do telefone na segunda API
     cpf3($cpf3, $chat_id);
-    
 }
+
 
 // Verificar se o comando "/cpf4" foi usado
 if (strpos($texto, "/cpf4") === 0) {
     // Extrair o telefone da mensagem
     $cpf4 = substr($texto, 6);
 
-    if (empty($cpf4)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $cpf4)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
 /cpf4 00000000000
@@ -812,43 +462,20 @@ if (strpos($texto, "/cpf4") === 0) {
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/cpf4.php';
 
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
     // Chamar a função de consulta do telefone na segunda API
     cpf4($cpf4, $chat_id);
-    
 }
 
-// Verificar se o comando "/nome" foi usado
-if (strpos($texto, "/nome") === 0) {
+// Verificar se o comando "/cep" foi usado
+if (strpos($texto, "/cep") === 0) {
     // Extrair o telefone da mensagem
-    $nome = substr($texto, 6);
+    $cep = substr($texto, 5);
 
-    if (empty($nome)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $cep)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
-/nome Jamilly Cambui de Oliveira
+/cep 69900000
 [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
         bot("sendMessage", array(
@@ -861,45 +488,22 @@ if (strpos($texto, "/nome") === 0) {
     }
 
     // Incluir o arquivo com as funções de consulta
-    require_once 'includes/nome.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
+    require_once 'includes/cep.php';
 
     // Chamar a função de consulta do telefone na segunda API
-    nome($nome, $chat_id);
-    
+    cep($cep, $chat_id);
 }
 
-// Verificar se o comando "/ip" foi usado
-if (strpos($texto, "/ip") === 0) {
+// Verificar se o comando "/rg" foi usado
+if (strpos($texto, "/rg") === 0) {
     // Extrair o telefone da mensagem
-    $ip = substr($texto, 6);
+    $rg = substr($texto, 4);
 
-    if (empty($ip)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $rg)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
-/ip 00000000000
+/rg 4978261
 [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
         bot("sendMessage", array(
@@ -912,44 +516,22 @@ if (strpos($texto, "/ip") === 0) {
     }
 
     // Incluir o arquivo com as funções de consulta
-    require_once 'includes/ip.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
+    require_once 'includes/rg.php';
 
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-    
     // Chamar a função de consulta do telefone na segunda API
-    ip($ip, $chat_id);
-        
+    rg($rg, $chat_id);
 }
 
-if (strpos($texto, "/cnpj") === 0) {
+    // Verificar se o comando "/parentes" foi usado
+if (strpos($texto, "/parentes") === 0) {
     // Extrair o telefone da mensagem
-    $cnpj = substr($texto, 6);
+    $parentes = substr($texto, 10);
 
-    if (empty($cnpj)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $parentes)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
-/cnpj 27865757000102
+/parentes 69900000
 [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
         bot("sendMessage", array(
@@ -962,91 +544,19 @@ if (strpos($texto, "/cnpj") === 0) {
     }
 
     // Incluir o arquivo com as funções de consulta
-    require_once 'includes/cnpj.php';
-
-bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
+    require_once 'includes/parentes.php';
 
     // Chamar a função de consulta do telefone na segunda API
-    cnpj($cnpj, $chat_id);
-    
+    parentes($parentes, $chat_id);
 }
 
-if (strpos($texto, "/placa1") === 0) {
-    // Extrair o telefone da mensagem
-    $placa1 = substr($texto, 8);
-
-    if (empty($placa1)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/placa1 QZO1J87
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/placa1.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
-    // Chamar a função de consulta do telefone na segunda API
-    placa1($placa1, $chat_id);
-    
-}
-
+// Verificar se o comando "/beneficios" foi usado
 if (strpos($texto, "/beneficios") === 0) {
     // Extrair o telefone da mensagem
-    $beneficios = substr($texto, 6);
+    $beneficios = substr($texto, 12);
 
-    if (empty($beneficios)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $beneficios)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
 /beneficios 00000000000
@@ -1063,43 +573,21 @@ if (strpos($texto, "/beneficios") === 0) {
 
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/beneficios.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
 
     // Chamar a função de consulta do telefone na segunda API
     beneficios($beneficios, $chat_id);
-    
 }
 
-if (strpos($texto, "/parentes") === 0) {
+    // Verificar se o comando "/cnpj" foi usado
+if (strpos($texto, "/cnpj") === 0) {
     // Extrair o telefone da mensagem
-    $parentes = substr($texto, 6);
+    $cnpj = substr($texto, 6);
 
-    if (empty($parentes)) {
+    // Validar se a entrada contém apenas números
+    if (!preg_match('/^\d+$/', $cnpj)) {
         $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
         $caption = '_Não seja mamaco, use assim_:
-/parentes QZO1J87
+/cnpj 69900000
 [ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
 
         bot("sendMessage", array(
@@ -1112,95 +600,24 @@ if (strpos($texto, "/parentes") === 0) {
     }
 
     // Incluir o arquivo com as funções de consulta
-    require_once 'includes/parentes.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
+    require_once 'includes/cnpj.php';
 
     // Chamar a função de consulta do telefone na segunda API
-    parentes($parentes, $chat_id);
-    
+    cnpj($cnpj, $chat_id);
 }
 
-if (strpos($texto, "/cep") === 0) {
-    // Extrair o telefone da mensagem
-    $cep = substr($texto, 5);
+//Código para o comando:
 
-    if (empty($cep)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/cep 54520015
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/cep.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
-    // Chamar a função de consulta do telefone na segunda API
-    cep($cep, $chat_id);
-    
-}
-
+// Verificar se o comando "/email" foi usado
 if (strpos($texto, "/email") === 0) {
     // Extrair o telefone da mensagem
-    $email = substr($texto, 6);
+    $emai = substr($texto, 6);
 
     if (empty($email)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
+        $photo_url = "https://i.ibb.co/2YhfdmV/1688958230412.png";
         $caption = '_Não seja mamaco, use assim_:
-/email joaozinho@gmail.com
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
+/email robertojose@hotmail.com
+[ ](' . $photo_url . ')';
 
         bot("sendMessage", array(
             "chat_id" => $chat_id,
@@ -1213,83 +630,9 @@ if (strpos($texto, "/email") === 0) {
 
     // Incluir o arquivo com as funções de consulta
     require_once 'includes/email.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
 
     // Chamar a função de consulta do telefone na segunda API
     email($email, $chat_id);
-    
-}
-
-if (strpos($texto, "/ip") === 0) {
-    // Extrair o telefone da mensagem
-    $ip = substr($texto, 6);
-
-    if (empty($ip)) {
-        $photo_url = "[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)";
-        $caption = '_Não seja mamaco, use assim_:
-/ip 204.152.203.157
-[ ](https://i.ibb.co/2YhfdmV/1688958230412.png)';
-
-        bot("sendMessage", array(
-            "chat_id" => $chat_id,
-            "text" => $caption,
-            "parse_mode" => "Markdown"
-        ));
-
-        exit();
-    }
-
-    // Incluir o arquivo com as funções de consulta
-    require_once 'includes/ip.php';
-    
-    bot("sendChatAction",
-array("chat_id"=> $chat_id,
-"action"=> "typing"));
-
-$txt = "Consultando🔎";
-
-bot("sendMessage", array(
-                "chat_id" => $chat_id,
-                "text" => $txt,
-                "parse_mode" => "Markdown",
-      /*          "reply_markup" => [
-                    "inline_keyboard" => [
-                        [
-                            ["text" => "🗑️", "callback_data" => "delete_message"]
-                        ]
-                    ]
-               ]*/
-            ));
-            
-           bot("sendChatAction", array(
-           "chat_id"=> $chat_id,
-           "action"=> 'typing'));
-
-    // Chamar a função de consulta do telefone na segunda API
-    ip($ip, $chat_id);
-    
 }
 
 if (!empty($data)) {
